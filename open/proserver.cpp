@@ -13,6 +13,7 @@
 #include<signal.h>
 #include<sys/wait.h>
 #include<sys/stat.h>
+#include<assert.h>
 #include"processpool.h"
 class cgi_conn{
     public:
