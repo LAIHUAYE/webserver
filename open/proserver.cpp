@@ -13,7 +13,8 @@
 #include<signal.h>
 #include<sys/wait.h>
 #include<sys/stat.h>
-#include<assert.h>
+
+#include <cassert>
 #include"processpool.h"
 class cgi_conn{
     public:
@@ -56,7 +57,7 @@ class cgi_conn{
                 }
                 m_buf[idx-1]='\0';
                 char*filename=m_buf;
-                if(assert(filename,F_OK)==-1){
+                if(access(filename,F_OK)==-1){
                     removefd(m_epollfd,m_sockfd);
                     break;
                 }
@@ -72,7 +73,7 @@ class cgi_conn{
                 else{
                     close(STDOUT_FILENO);
                     dup(m_sockfd);
-                    execl(m_buf,m_buf,0);
+                    execl(m_buf,m_buf,NULL);
                     exit(0);
                 }
             }
@@ -102,7 +103,7 @@ int main(int argc,char*argv[]){
     address.sin_family=AF_INET;
     inet_pton(AF_INET,ip,&address.sin_port);
     address.sin_port=htons(port);
-    ret=bind(listenfd,(struct* sockaddr*)&address,sizeof(address));
+    ret=bind(listenfd,(struct sockaddr*)&address,sizeof(address));
     assert(ret!=-1);
     ret=listen(listenfd,5);
     assert(ret!=-1);
