@@ -1,0 +1,8 @@
+{
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.autoSave": "onFocusChange",
+    "files.associations": {
+        "deque": "cpp",
+        "*.tcc": "cpp"
+    }
+}
